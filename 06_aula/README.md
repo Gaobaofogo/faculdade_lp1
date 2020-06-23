@@ -1,4 +1,4 @@
-##Como compilar o programa:
+## Como compilar o programa:
 
 Primeiro precisamos gerar os arquivos objetos. Para gerar, rode os comandos:
 
