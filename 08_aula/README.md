@@ -15,20 +15,18 @@ $ g++ -Wall -std=c++11 -o prog *.o
 
 ## Testes
 
-Por enquanto, só estou testando o diário para evitar vazamento de memória e inserir corretamente as mensagens dentro do diário. Usei o Valgrind para checar erros de vazamento
-de memória. Para executar o teste existente, compile da seguinte forma:
+Estou usando o [Catch2](https://github.com/catchorg/Catch2) para realizar os testes e o [Valgrind](https://www.valgrind.org/) para garantir que não haja vazamento de memória. Para compilar os testes de unidade:
 
 ```
-$ g++ -Wall -std=c++11 -c -I../include *.cpp ../src/Diary.cpp
+$ cd test
+$ g++ -Wall -std=c++11 -c -I ../include/ HourTest.cpp DateTest.cpp DiaryTest.cpp MainTest.cpp ../src/Date.cpp ../src/Hour.cpp ../src/helper_time.cpp ../src/Date.cpp ../src/Diary.cpp 
 $ g++ -Wall -std=c++11 -o prog *.o
 ```
 
-A saída esperada é:
+Para executar:
 
 ```
 $ ./prog
-51
-60
 ```
 
 Para executar com o Valgrind(supondo que já esteja instalado):
