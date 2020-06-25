@@ -6,7 +6,7 @@ Time::Time(): second(0), minute(0), hour(0) {
 
 }
 
-std::string Time::get_time() {
+std::string Time::to_string() {
   std::stringstream time;
   std::string time_to_return;
 
@@ -16,20 +16,8 @@ std::string Time::get_time() {
   return time_to_return;
 }
 
-void Time::receive_current_time() {
-  const std::string format = "%H:%M:%S";
-  std::time_t time = std::time(nullptr);
-  char result[1024];
-
-  std::strftime(
-      result,
-      sizeof(result),
-      format.c_str(),
-      std::localtime(&time)
-      );
-
-  std::string time_string(result);
-  std::stringstream stime(time_string);
+void Time::set_from_string(const std::string& time) {
+  std::stringstream stime(time);
   char discard;
 
   stime >> hour;

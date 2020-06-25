@@ -1,4 +1,5 @@
 #include "Diary.h"
+#include "helper_time.h"
 
 #include <string>
 
@@ -34,8 +35,8 @@ void Diary::insert_message(const std::string& message) {
   Date new_date;
   Time new_time;
   
-  new_date.receive_current_date();
-  new_time.receive_current_time();
+  new_date.set_from_string(get_current_date());
+  new_time.set_from_string(get_current_time());
 
   new_message.content = message;
   new_message.time = new_time;

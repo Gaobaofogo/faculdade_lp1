@@ -1,14 +1,10 @@
 #include "Hour.h"
+#include "catch.h"
 
-#include <iostream>
 
-
-int main(int argc, char* argv[]) {
+TEST_CASE("Hour", "[hour]") {
   Time time;
+  time.set_from_string("13:59:30");
 
-  time.receive_current_time();
-
-  std::cout << time.get_time() << std::endl;
-
-  return 0;
+  REQUIRE( time.to_string() == "13:59:30" );
 }

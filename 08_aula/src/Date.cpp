@@ -6,7 +6,7 @@ Date::Date(): day(0), month(0), year(0) {
 
 }
 
-std::string Date::get_date() {
+std::string Date::to_string() {
   std::stringstream date;
   std::string date_to_return;
 
@@ -16,20 +16,8 @@ std::string Date::get_date() {
   return date_to_return;
 }
 
-void Date::receive_current_date() {
-  const std::string format = "%d/%m/%Y";
-  std::time_t time = std::time(nullptr);
-  char result[1024];
-
-  std::strftime(
-      result,
-      sizeof(result),
-      format.c_str(),
-      std::localtime(&time)
-      );
-
-  std::string date_string(result);
-  std::stringstream sdate(date_string);
+void Date::set_from_string(const std::string& date) {
+  std::stringstream sdate(date);
   char discard;
 
   sdate >> day;

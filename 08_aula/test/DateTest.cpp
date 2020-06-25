@@ -1,14 +1,10 @@
 #include "Date.h"
+#include "catch.h"
 
-#include <iostream>
 
-
-int main(int argc, char* argv[]) {
+TEST_CASE("Date", "[date]") {
   Date date;
+  date.set_from_string("24/07/2020");
 
-  date.receive_current_date();
-
-  std::cout << date.get_date() << std::endl;
-
-  return 0;
+  REQUIRE( date.to_string() == "24/7/2020" );
 }

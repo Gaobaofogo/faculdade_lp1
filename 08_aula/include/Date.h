@@ -10,9 +10,9 @@ struct Date {
   unsigned year;
 
   Date();
-  std::string get_date();
+  std::string to_string();
   bool compare_dates(Date& other_date);
-  void receive_current_date();
+  void set_from_string(const std::string& date);
 };
 
 #endif

@@ -10,8 +10,8 @@ struct Time {
   unsigned hour;
 
   Time();
-  std::string get_time();
-  void receive_current_time();
+  void set_from_string(const std::string& time);
+  std::string to_string();
 };
 
 #endif
