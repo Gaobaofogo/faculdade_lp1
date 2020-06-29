@@ -1,9 +1,14 @@
 COMPILER = g++
 FLAGS = -Wall -std=c++11 -I include
 PROGRAM_NAME = prog
+CPP_FILES = $(wildcard src/*.cpp)
 
-all: bin/main.o bin/App.o bin/Date.o bin/Diary.o bin/Hour.o bin/helper_time.o
-  $(COMPILER) $(FLAGS) -o $(PROGRAM_NAME) ./bin/*.o
+all: object_files
+	$(COMPILER) $(FLAGS) -o $(PROGRAM_NAME) *.o
 
-bin/helper_time.o: src/helper_time.cpp
-  $(COMPILER) $(FLAGS) -c 
+object_files:
+	$(COMPILER) $(FLAGS) -c $(CPP_FILES)
+
+clean:
+	rm *.o
+	rm $(PROGRAM_NAME)
