@@ -44,3 +44,28 @@ TEST_CASE("Diário usando o arquivo", "[diario]") {
   test_file.close();
   remove("diary_test.md");
 }
+
+TEST_CASE("Buscando mensagens no diário", "[diario]") {
+  remove("diary_test.md");
+
+  Diary test_diary("diary_test.md");
+  std::string text_in_message = "1";
+  std::string text_not_in_message = "2";
+  Message m1;
+  Date date;
+  Time time;
+
+  m1.content = "Mensagem 1";
+  m1.date = date;
+  m1.time = time;
+
+  m1.date.set_from_string("26/06/2020");
+  m1.time.set_from_string("03:03:03");
+
+  test_diary.insert_message(m1);
+
+  REQUIRE( test_diary.search(text_in_message) != nullptr );
+  REQUIRE( test_diary.search(text_not_in_message) == nullptr );
+
+  remove("diary_test.md");
+}
