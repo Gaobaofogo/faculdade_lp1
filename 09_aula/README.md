@@ -1,16 +1,15 @@
 ## Como compilar o programa:
 
-Primeiro precisamos gerar os arquivos objetos com os seguintes comandos:
+Para gerar o executável:
 
 ```
-$ cd src
-$ g++ -Wall -std=c++11 -c -I../include *.cpp
+$ make
 ```
 
-Com os arquivos objetos em mãos, hora de criar o executável:
+Para rodar o programa, execute a linha a seguir:
 
 ```
-$ g++ -Wall -std=c++11 -o prog *.o
+$ ./prog
 ```
 
 ## Testes
@@ -18,21 +17,19 @@ $ g++ -Wall -std=c++11 -o prog *.o
 Estou usando o [Catch2](https://github.com/catchorg/Catch2) para realizar os testes e o [Valgrind](https://www.valgrind.org/) para garantir que não haja vazamento de memória. Para compilar os testes de unidade:
 
 ```
-$ cd test
-$ g++ -Wall -std=c++11 -c -I ../include/ HourTest.cpp DateTest.cpp DiaryTest.cpp MainTest.cpp ../src/Date.cpp ../src/Hour.cpp ../src/helper_time.cpp ../src/Date.cpp ../src/Diary.cpp 
-$ g++ -Wall -std=c++11 -o prog *.o
+$ make test
 ```
 
-Para executar:
+Para rodas os testes:
 
 ```
-$ ./prog
+$ ./prog_test
 ```
 
-Para executar com o Valgrind(supondo que já esteja instalado):
+Para executar com o Valgrind(supondo que o programa já esteja instalado e os testes foram compilados):
 
 ```
-$ valgrind --leak-check=yes ./prog
+$ valgrind --leak-check=yes ./prog_test
 ```
 
 ### Observações
