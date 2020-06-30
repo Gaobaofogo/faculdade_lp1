@@ -2,6 +2,8 @@
 #include "catch.h"
 
 #include <string>
+#include <fstream>
+#include <iostream>
 
 
 TEST_CASE("Atributos do diário", "[diario]") {
@@ -17,6 +19,7 @@ TEST_CASE("Atributos do diário", "[diario]") {
 }
 
 TEST_CASE("Diário usando o arquivo", "[diario]") {
+  remove("diary_test.md");
   Diary test_diary("diary_test.md");
   Message m1;
   Date date;
@@ -27,14 +30,17 @@ TEST_CASE("Diário usando o arquivo", "[diario]") {
   m1.time = time;
 
   m1.date.set_from_string("26/06/2020");
-
   m1.time.set_from_string("03:03:03");
 
+  test_diary.insert_message(m1);
+  test_diary.write();
+
+  std::ifstream test_file("diary_test.md");
 
   REQUIRE( test_diary.messages_size == 1);
   REQUIRE( test_diary.messages_capacity == 10);
+  REQUIRE( test_file.good() == true );
 
-  test_diary.insert_message(m1);
-  test_diary.insert_message(m1);
-  test_diary.write();
+  test_file.close();
+  remove("diary_test.md");
 }
