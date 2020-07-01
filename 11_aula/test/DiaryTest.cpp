@@ -67,6 +67,8 @@ TEST_CASE("Buscando mensagens no diário", "[diario]") {
   REQUIRE( test_diary.search(text_in_message).size() == 1 );
   REQUIRE( test_diary.search(text_in_message).capacity() == 1 );
 
+  REQUIRE( test_diary.search(text_not_in_message).size() == 0 );
+  REQUIRE( test_diary.search(text_not_in_message).capacity() == 0 );
 
   remove("diary_test.md");
 }
