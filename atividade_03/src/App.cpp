@@ -62,7 +62,7 @@ void App::interactive() {
       std::cout << std::endl;
     } else if (option == '2') {
       std::cout << std::endl;
-      add();
+      add_interactive();
       std::cout << std::endl;
     } else if (option == '0') {
       finish_program = true;
@@ -70,6 +70,15 @@ void App::interactive() {
       std::cout << "Opção desconhecida pelo programa" << std::endl << std::endl;
     }
   }
+}
+
+void App::add_interactive() {
+  std::string message;
+
+  std::cout << "Digite uma mensagem: ";
+  std::getline(std::cin.ignore(), message);
+
+  add(message);
 }
 
 void App::print_iteractive_options() {
@@ -83,7 +92,7 @@ void App::add() {
   std::string message;
 
   std::cout << "Digite uma mensagem: ";
-  std::getline(std::cin.ignore(), message);
+  std::getline(std::cin, message);
 
   add(message);
 }
