@@ -22,7 +22,7 @@ struct App {
   void interactive();
   void print_iteractive_options();
   void add_interactive();
-  std::string aux_list_messages(std::string final_message, Message message, std::string message_in_format);
+  std::string format_string(std::string final_message, Message message, std::string message_in_format);
 };
 
 #endif

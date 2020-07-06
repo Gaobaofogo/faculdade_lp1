@@ -137,17 +137,17 @@ int App::show_usage(char* prog_name) {
 
 void App::list_messages() {
   for (auto it = diary.messages.begin(); it != diary.messages.end(); ++it) {
-    std::cout << aux_list_messages("", (*it), message_format) << std::endl;
+    std::cout << format_string("", (*it), message_format) << std::endl;
   }
 }
 
 void App::list_messages(const std::string& user_format) {
   for (auto it = diary.messages.begin(); it != diary.messages.end(); ++it) {
-    std::cout << aux_list_messages("", (*it), user_format) << std::endl;
+    std::cout << format_string("", (*it), user_format) << std::endl;
   }
 }
 
-std::string App::aux_list_messages(std::string final_message, Message message, std::string message_in_format) {
+std::string App::format_string(std::string final_message, Message message, std::string message_in_format) {
   std::string aux_final_message;
   bool encontrou_parametro = false;
   size_t position = message_in_format.find("%");
@@ -178,5 +178,5 @@ std::string App::aux_list_messages(std::string final_message, Message message, s
 
   final_message.append(aux_final_message);
 
-  return aux_list_messages(final_message, message, message_in_format);
+  return format_string(final_message, message, message_in_format);
 }
