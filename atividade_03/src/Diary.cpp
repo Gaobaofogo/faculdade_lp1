@@ -37,8 +37,6 @@ Diary::Diary(const std::string& _filename): filename(_filename) {
 
       std::getline(sline, message);
 
-      message.erase(0, 1);
-
       Message new_message;
       Date new_date;
       Time new_time;
