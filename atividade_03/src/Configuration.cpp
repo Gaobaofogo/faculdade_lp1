@@ -12,6 +12,9 @@ Configuration::Configuration(const std::string& _config_filename): config_filena
 
     config_write_file << "path=diary.md" << std::endl;
     config_write_file << "default_format=%d %t: %m" << std::endl;
+
+    configs["path"] = "diary.md";
+    configs["default_format"] = "%d %t: %m";
   } else {
     // Arquivo de configuração existe
     // Ler coisas do arquivo
