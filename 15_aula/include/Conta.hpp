@@ -14,6 +14,7 @@ class Conta {
     float saldo;
 
     Conta(int numero, std::string titular, float saldo);
+    ~Conta();
     static int quantidadeDeContas;
     void saca(float valor);
     void deposita(float valor);

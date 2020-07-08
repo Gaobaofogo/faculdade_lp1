@@ -9,6 +9,10 @@ Conta::Conta(int numero, std::string titular, float saldo) {
   this->quantidadeDeContas += 1;
 }
 
+Conta::~Conta() {
+  this->quantidadeDeContas -= 1;
+}
+
 void Conta::saca(float valor) {
   this->saldo -= valor;
 }
