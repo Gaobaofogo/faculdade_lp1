@@ -1,7 +1,12 @@
+#include "Cliente.hpp"
+
 #include <iostream>
+#include <vector>
 
 
 int main(int argc, char* argv[]) {
+  std::vector<Cliente> clientes;
+
   std::cout << "Loja virtual 1.0" << std::endl << std::endl;
 
   std::cout << "Bem vindo a loja cliente X." << std::endl;
