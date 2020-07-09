@@ -18,5 +18,3 @@ test_objects:
 clean:
 	rm -rf *.o
 	rm -rf $(PROGRAM_NAME)
-	rm -rf $(PROGRAM_NAME)_test
-	rm -rf diary.config
