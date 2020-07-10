@@ -22,6 +22,12 @@ int main(int argc, char* argv[]) {
     std::cin >> opcao;
 
     if (opcao == '1') {
+      float novo_saldo;
+
+      std::cout << "Digite o novo saldo: ";
+      std::cin >> novo_saldo;
+
+      clientes[clientes.size() - 1].saldo = novo_saldo;
     } else if (opcao == '2') {
     } else if (opcao == '3') {
     } else if (opcao == '0') {
@@ -47,7 +53,7 @@ int main(int argc, char* argv[]) {
 void print_client_menu(int qntdClientes) {
   std::cout << "Bem vindo a loja cliente " << qntdClientes << "." << std::endl;
   std::cout << "Selecione uma opção:" << std::endl << std::endl;
-  std::cout << "\t1) Adicionar saldo" << std::endl;
+  std::cout << "\t1) Modificar saldo" << std::endl;
   std::cout << "\t2) Ver produtos da loja" << std::endl;
   std::cout << "\t3) Ver conteúdo da sacola" << std::endl;
   std::cout << std::endl;
