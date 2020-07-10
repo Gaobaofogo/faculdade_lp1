@@ -1,6 +1,6 @@
 COMPILER = g++
 FLAGS = -Wall -std=c++11 -I include -g
-PROGRAM_NAME = prog
+PROGRAM_NAME = supermercado
 CPP_FILES = $(wildcard src/*.cpp)
 
 all: object_files
