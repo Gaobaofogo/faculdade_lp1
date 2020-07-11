@@ -9,12 +9,7 @@ all: object_files
 object_files:
 	$(COMPILER) $(FLAGS) -c $(CPP_FILES) main.cpp
 
-test: test_objects
-	$(COMPILER) $(FLAGS) -o $(PROGRAM_NAME)_test *.o
-
-test_objects:
-	$(COMPILER) $(FLAGS) -c -I include $(CPP_FILES) test/*.cpp
-
 clean:
 	rm -rf *.o
 	rm -rf $(PROGRAM_NAME)
+	rm -rf cliente_*.txt

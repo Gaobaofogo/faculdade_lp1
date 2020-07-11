@@ -27,7 +27,6 @@ Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
     std::vector<std::string> produto;
     std::string valor_do_produto;
 
-    std::cout << linha << std::endl;
     size_t posicao;
 
     do {
@@ -67,4 +66,14 @@ void Estabelecimento::listar() {
     std::cout << "\tQuantidade: " << it->quantidade << std::endl;
     std::cout << "\tPreço: R$ " << it->preco << std::endl << std::endl;
   }
+}
+
+Produto* Estabelecimento::buscaProduto(int codigo_produto) {
+  for (auto it = this->produtos.begin(); it != this->produtos.end(); ++it) {
+    if (it->codigo == codigo_produto) {
+      return &(*it);
+    }
+  }
+
+  return nullptr;
 }
