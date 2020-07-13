@@ -15,6 +15,9 @@ class ClienteTerminal {
     int run();
     void print_client_menu(int qntdClientes);
     void atualizar_saldo_do_cliente();
+    void exibirSacola();
+    void colocarProdutoNaSacola();
+    bool encerrarAtividadeDoCliente();
 };
 
 #endif
