@@ -125,7 +125,7 @@ int ClienteTerminal::run() {
     } else if (opcao == EncerrarAtividadeDoCliente) {
       continuar_no_programa = this->encerrarAtividadeDoCliente();
     } else {
-      std::cout << "Opção desconhecida pelo programa;" << std::endl;
+      std::cout << "Opção desconhecida pelo programa." << std::endl;
     }
   }
 
