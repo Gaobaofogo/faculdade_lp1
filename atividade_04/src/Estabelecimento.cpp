@@ -5,6 +5,9 @@
 #include <iostream>
 #include <vector>
 
+Estabelecimento::Estabelecimento() {
+  Estabelecimento("estoque.csv");
+}
 
 Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
   std::ifstream arquivo_estoque(caminho_arquivo_estoque);

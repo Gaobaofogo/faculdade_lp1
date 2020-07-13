@@ -9,7 +9,7 @@ $ make
 Para rodar o programa, execute a linha a seguir:
 
 ```
-$ ./supermercado
+$ ./supermercado.sh
 ```
 
 ### Observações

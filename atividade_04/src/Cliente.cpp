@@ -1,4 +1,5 @@
 #include "Cliente.hpp"
+#include "Produto.hpp"
 
 #include <fstream>
 #include <iostream>

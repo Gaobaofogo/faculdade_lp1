@@ -1,5 +1,5 @@
-#ifndef ESTABELECIMENTO_H
-#define ESTABELECIMENTO_H
+#ifndef ESTABELECIMENTO_HPP
+#define ESTABELECIMENTO_HPP
 
 #include "Produto.hpp"
 
@@ -14,11 +14,12 @@ class Estabelecimento {
     std::string unidadeMedida;
     float preco;
 
+    Estabelecimento();
     Estabelecimento(const std::string& caminho_arquivo_estoque);
     void listar();
     void venda(const std::string& codigo);
     Produto* buscaProduto(int codigo_produto);
-    void caixa(std::);
+    void caixa();
 };
 
 #endif
