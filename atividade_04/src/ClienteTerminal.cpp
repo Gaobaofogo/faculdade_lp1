@@ -4,11 +4,13 @@
 
 ClienteTerminal::ClienteTerminal(const std::string& nome_arquivo) {
   Estabelecimento estabelecimento(nome_arquivo);
+  Cliente primeiro_cliente(0);
 
-  this->estabelecimento = estabelecimento;
+  this->estabelecimento = this->estabelecimento;
+  this->clientes.push_back(primeiro_cliente);
 }
 
-void print_client_menu(int qntdClientes) {
+void ClienteTerminal::print_client_menu(int qntdClientes) {
   std::cout << std::endl;
   std::cout << "Selecione uma opção cliente " << qntdClientes << ":" << std::endl << std::endl;
   std::cout << "\t1) Adicionar saldo" << std::endl;
@@ -19,41 +21,41 @@ void print_client_menu(int qntdClientes) {
   std::cout << "\t0) Encerrar as atividades do cliente " << qntdClientes << std::endl;
 }
 
+void ClienteTerminal::atualizar_saldo_do_cliente() {
+  float novo_saldo;
+
+  std::cout << "Digite o valor a ser inserido no saldo: ";
+  std::cin >> novo_saldo;
+
+  this->clientes[this->clientes.size() - 1].saldo += novo_saldo;
+
+  std::cout << "Saldo atual: R$ " << this->clientes[this->clientes.size() - 1].saldo << std::endl;
+}
+
 int ClienteTerminal::run() {
-  Estabelecimento estabelecimento("estoque.csv");
-  std::vector<Cliente> clientes;
-  Cliente cliente_1(0);
   char opcao;
   bool continuar_no_programa = true;
-
-  clientes.push_back(cliente_1);
 
   std::cout << "Loja virtual 1.0" << std::endl;
 
   while (continuar_no_programa == true) {
-    print_client_menu(clientes.size());
+    this->print_client_menu(this->clientes.size());
 
     std::cout << "Digite uma opção: ";
     std::cin >> opcao;
 
     if (opcao == '1') {
-      float novo_saldo;
-
-      std::cout << "Digite o valor a ser inserido no saldo: ";
-      std::cin >> novo_saldo;
-
-      clientes[clientes.size() - 1].saldo += novo_saldo;
-      std::cout << "Saldo atual: R$ " << clientes[clientes.size() - 1].saldo << std::endl;
+      this->atualizar_saldo_do_cliente();
     } else if (opcao == '2') {
-      estabelecimento.listar();
+      this->estabelecimento.listar();
     } else if (opcao == '3') {
-      if (clientes[clientes.size() - 1].sacola.size()) {
+      if (this->clientes[this->clientes.size() - 1].sacola.size()) {
         std::cout << std::endl << "Quantidade de itens da sacola: ";
-        std::cout << clientes[clientes.size() - 1].sacola.size() << std::endl;
+        std::cout << this->clientes[this->clientes.size() - 1].sacola.size() << std::endl;
 
         int i = 1;
 
-        for (auto it = clientes[clientes.size() - 1].sacola.begin(); it != clientes[clientes.size() - 1].sacola.end(); ++it, ++i) {
+        for (auto it = this->clientes[this->clientes.size() - 1].sacola.begin(); it != this->clientes[this->clientes.size() - 1].sacola.end(); ++it, ++i) {
           std::cout << "\tNome: " << it->nome << " - ";
           std::cout << "\tPreço: R$ " << it->preco << std::endl; 
         }
@@ -66,13 +68,13 @@ int ClienteTerminal::run() {
       std::cout << "Digite o código do produto: ";
       std::cin >> codigo_produto;
 
-      Produto* produto_encontrado = estabelecimento.buscaProduto(codigo_produto);
+      Produto* produto_encontrado = this->estabelecimento.buscaProduto(codigo_produto);
 
       if (produto_encontrado == nullptr) {
         std::cout << "Produto não encontrado" << std::endl << std::endl;
       } else {
         if (produto_encontrado->quantidade > 0) {
-          clientes[clientes.size() - 1].compra((*produto_encontrado));
+          this->clientes[this->clientes.size() - 1].compra((*produto_encontrado));
           produto_encontrado->quantidade -= 1;
         } else {
           std::cout << "Não temos mais o produto requisitado em estoque" << std::endl;
@@ -89,12 +91,12 @@ int ClienteTerminal::run() {
       } else if (resposta == 'y' || resposta == 'Y') {
 
         Cliente novo_cliente(0);
-        clientes.push_back(novo_cliente);
+        this->clientes.push_back(novo_cliente);
       } else {
         std::cout << "Opção não conhecida" << std::endl;
       }
 
-      clientes[clientes.size() - 1].registro(clientes.size());
+      this->clientes[this->clientes.size() - 1].registro(this->clientes.size());
     } else {
       std::cout << "Opção desconhecida pelo programa;" << std::endl;
     }

@@ -13,6 +13,8 @@ class ClienteTerminal {
   public:
     ClienteTerminal(const std::string& nome_arquivo);
     int run();
+    void print_client_menu(int qntdClientes);
+    void atualizar_saldo_do_cliente();
 };
 
 #endif
