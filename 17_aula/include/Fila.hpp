@@ -12,7 +12,6 @@ template <typename T>
 struct Elemento {
   T valor;
   Elemento<T>* proximoElemento;
-  Elemento<T>* elementoAnterior;
 };
 
 template <typename T>
@@ -20,13 +19,11 @@ class Fila {
   private:
     std::size_t qntdElementos;
     Elemento<T>* primeiroElemento;
-    Elemento<T>* ultimoElemento;
 
   public:
     Fila() {
       this->qntdElementos = 0;
       primeiroElemento = nullptr;
-      ultimoElemento = nullptr;
     }
 
     ~Fila() {
@@ -44,31 +41,37 @@ class Fila {
     }
 
     T primeiro() {
-      return primeiroElemento->valor;
+      if (this->vazio()) {
+        throw "Não é possível percorrer uma fila vazia.";
+      }
+
+      Elemento<T>* aux = this->primeiroElemento;
+      
+      while (aux->proximoElemento != nullptr) {
+        aux = aux->proximoElemento;
+      }
+
+      return aux->valor;
     }
 
     T ultimo() {
-      return ultimoElemento->valor;
+      return this->primeiroElemento->valor;
     }
 
     void empurrar(T valor) {
-      Elemento<T>* novoElemento = new Elemento<T>;
-      novoElemento->valor = valor;
-      novoElemento->proximoElemento = nullptr;
-      novoElemento->elementoAnterior = nullptr;
-
       if (this->vazio()) {
-        primeiroElemento = novoElemento;
-        ultimoElemento = novoElemento;
-
-        this->primeiroElemento->proximoElemento = this->ultimoElemento;
-        this->ultimoElemento->elementoAnterior = this->primeiroElemento;
+        this->primeiroElemento = new Elemento<T>;
+        this->primeiroElemento->valor = valor;
+        this->primeiroElemento->proximoElemento = nullptr;
       } else {
-        this->primeiroElemento->elementoAnterior = novoElemento;
-        novoElemento->proximoElemento = this->primeiroElemento;
+        Elemento<T>* novoElemento = new Elemento<T>;
+        novoElemento->valor = valor;
 
+        novoElemento->proximoElemento = this->primeiroElemento;
         this->primeiroElemento = novoElemento;
       }
+
+      ++qntdElementos;
     }
 
     void extrair() {
@@ -76,12 +79,19 @@ class Fila {
         throw "Não é possível extrair elementos de uma fila vazia.";
       }
 
-      T valorDoUltimoElemento = this->ultimoElemento->valor;
-      Elemento<T>* aux = this->ultimoElemento;
+      Elemento<T>* aux = this->primeiroElemento;
+      Elemento<T>* penultimo_elemento = this->primeiroElemento;
 
-      this->ultimoElemento = this->ultimoElemento->elementoAnterior;
+      while (aux->proximoElemento != nullptr) {
+        penultimo_elemento = aux;
+        aux = aux->proximoElemento;
+      }
+
+      penultimo_elemento->proximoElemento = nullptr;
 
       delete aux;
+
+      this->qntdElementos -= 1;
     }
 };
 
