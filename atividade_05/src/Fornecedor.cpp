@@ -3,6 +3,9 @@
 #include <fstream>
 #include <iostream>
 
+Fornecedor::Fornecedor() {
+  Fornecedor("fornecedor.csv");
+}
 
 Fornecedor::Fornecedor(std::string nomeArquivo) {
   std::ifstream arquivo_leitura(nomeArquivo);
@@ -13,31 +16,37 @@ Fornecedor::Fornecedor(std::string nomeArquivo) {
   }
 
   std::string linha;
-  std::nome;
+  std::string nome;
   int quantidade;
 
-  while (std::getline(arquivo_leitura, linha)) {
+  while (std::getline(arquivo_leitura, linha) && linha.size()) {
     nome = linha.substr(0, linha.find(','));
 
     linha.erase(0, linha.find(',') + 1);
 
-    quantidade = std::atoi(linha);
+    quantidade = std::atoi(linha.c_str());
 
     ProdutoFornecedor novoProduto(nome, quantidade);
 
     this->produtos.push_back(novoProduto);
   }
 
-  void listarProdutos() {
-    for (auto it = this->produtos.begin(); it != this->produtos.end(); ++it) {
-      std::cout << "Nome: " << it->nome " - Quantidade: " << it->quantidade;
-      std::cout << std::endl;
+}
+void Fornecedor::listarProdutos() {
+  for (auto it = this->produtos.begin(); it != this->produtos.end(); ++it) {
+    std::cout << "Nome: " << it->nome << " - Quantidade: " << it->qntd;
+    std::cout << std::endl;
+  }
+}
+
+bool Fornecedor::repassarProdutos(Estabelecimento estabelecimento, std::string nomeProduto, int quantidade) {
+  for (auto it = this->produtos.begin(); it != this->produtos.end(); ++it) {
+    if (it->nome == nomeProduto && it->qntd - quantidade > 0) {
+      it->qntd -= quantidade;
+      return true;
     }
   }
 
-  void repassarProdutos(Estabelecimento estabelecimento) {
-
-      if (produtoEncontrado != nullptr) {
-        ProdutoFornecedor->quantidade += it->quantidade;
-      }
+  return false;
 }
+

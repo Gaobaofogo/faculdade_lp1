@@ -20,6 +20,7 @@ class Estabelecimento {
     void venda(const std::string& codigo);
     Produto* buscaProduto(int codigo_produto);
     Produto* buscaProduto(std::string nome);
+    void reabastecer(int codigo, int quantidade);
     void caixa();
 };
 

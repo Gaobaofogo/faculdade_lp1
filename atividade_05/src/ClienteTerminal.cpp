@@ -1,12 +1,15 @@
 #include "ClienteTerminal.hpp"
+#include "Fornecedor.hpp"
 
 #include <iostream>
 
 ClienteTerminal::ClienteTerminal(const std::string& nome_arquivo) {
   Estabelecimento estabelecimento(nome_arquivo);
+  Fornecedor fornecedor("fornecedor.csv");
   Cliente primeiro_cliente(0);
 
   this->estabelecimento = this->estabelecimento;
+  this->fornecedor = fornecedor;
   this->clientes.push_back(primeiro_cliente);
 }
 
@@ -18,7 +21,7 @@ void ClienteTerminal::print_client_menu(int qntdClientes) {
   std::cout << "\t3) Ver conteúdo da sacola" << std::endl;
   std::cout << "\t4) Colocar um produto na sacola" << std::endl;
   std::cout << "\t5) Listar produtos do fornecedor" << std::endl;
-  std::cout << "\t6) " << std::endl;
+  std::cout << "\t6) Reabastecer o estoque" << std::endl;
   std::cout << std::endl;
   std::cout << "\t0) Encerrar as atividades do cliente " << qntdClientes << std::endl;
 }
@@ -94,13 +97,37 @@ bool ClienteTerminal::encerrarAtividadeDoCliente() {
   return true;
 }
 
+void ClienteTerminal::abastecerEstoque() {
+  std::string nome;
+  int quantidade;
+
+  std::cout << "Digite o nome: ";
+  std::cin >> nome;
+
+  std::cout << "Digite a quantidade: ";
+  std::cin >> quantidade;
+
+  bool temNoFornecedor = this->fornecedor.repassarProdutos(
+      this->estabelecimento,
+      nome,
+      quantidade
+      );
+  
+  if (temNoFornecedor) {
+    Produto* produtoEncontrado = this->estabelecimento.buscaProduto(nome);
+    this->estabelecimento.reabastecer(produtoEncontrado->codigo, quantidade);
+  }
+}
+
 int ClienteTerminal::run() {
   enum Opcoes { 
     EncerrarAtividadeDoCliente,
     AddSaldo,
     VerLoja,
     VerSacola,
-    AddNaSacola
+    AddNaSacola,
+    VerFornecedor,
+    AbastecerEstoque
     };
   Opcoes opcao;
   int input_do_usuario;
@@ -118,14 +145,25 @@ int ClienteTerminal::run() {
 
     if (opcao == AddSaldo) {
       this->atualizar_saldo_do_cliente();
+
     } else if (opcao == VerLoja) {
       this->estabelecimento.listar();
+
     } else if (opcao == VerSacola) {
       this->exibirSacola();
+
     } else if (opcao == AddNaSacola) {
       this->colocarProdutoNaSacola();
+
     } else if (opcao == EncerrarAtividadeDoCliente) {
       continuar_no_programa = this->encerrarAtividadeDoCliente();
+
+    } else if (opcao == VerFornecedor) {
+      this->fornecedor.listarProdutos();
+
+    } else if (opcao == AbastecerEstoque) {
+      this->abastecerEstoque();
+
     } else {
       std::cout << "Opção desconhecida pelo programa." << std::endl;
     }

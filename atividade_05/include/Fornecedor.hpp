@@ -2,6 +2,7 @@
 #define FORNECEDOR_HPP
 
 #include "Estabelecimento.hpp"
+#include "ProdutoFornecedor.hpp"
 
 #include <vector>
 
@@ -12,9 +13,10 @@ class Fornecedor {
     void diminuiProdutos();
 
   public:
+    Fornecedor();
     Fornecedor(std::string nomeArquivo);
     void listarProdutos();
-    void repassarProdutos(Estabelecimento estabelecimento);
+    bool repassarProdutos(Estabelecimento estabelecimento, std::string nomeProduto, int quantidade);
 };
 
 #endif

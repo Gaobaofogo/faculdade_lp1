@@ -60,6 +60,7 @@ Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
   }
 
   this->produtos = produtos;
+  std::cout << this->produtos[0].nome << std::endl;
 }
 
 void Estabelecimento::listar() {
@@ -89,4 +90,13 @@ Produto* Estabelecimento::buscaProduto(std::string nome) {
   }
 
   return nullptr;
+}
+
+void Estabelecimento::reabastecer(int codigo, int quantidade) {
+  for (auto it = this->produtos.begin(); it != this->produtos.end(); ++it) {
+    if (it->codigo == codigo) {
+      it->quantidade += quantidade;
+      break;
+    }
+  }
 }

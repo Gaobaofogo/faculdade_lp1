@@ -1,14 +1,16 @@
 #ifndef CLIENTE_TERMINAL_HPP
 #define CLIENTE_TERMINAL_HPP
 
-#include "Estabelecimento.hpp"
 #include "Cliente.hpp"
+#include "Estabelecimento.hpp"
+#include "Fornecedor.hpp"
 
 
 class ClienteTerminal {
   private:
     Estabelecimento estabelecimento;
     std::vector<Cliente> clientes;
+    Fornecedor fornecedor;
 
   public:
     ClienteTerminal(const std::string& nome_arquivo);
@@ -18,6 +20,7 @@ class ClienteTerminal {
     void exibirSacola();
     void colocarProdutoNaSacola();
     bool encerrarAtividadeDoCliente();
+    void abastecerEstoque();
 };
 
 #endif
