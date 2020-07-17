@@ -11,7 +11,7 @@
 class Cliente {
   public:
     float saldo;
-    std::vector<Produto> sacola;
+    vector_supermercado<Produto> sacola;
 
     Cliente(float _saldo);
     void compra(Produto novo_produto);

@@ -4,12 +4,8 @@
 #include <iostream>
 
 ClienteTerminal::ClienteTerminal(const std::string& nome_arquivo) {
-  Estabelecimento estabelecimento(nome_arquivo);
-  Fornecedor fornecedor("fornecedor.csv");
   Cliente primeiro_cliente(0);
 
-  this->estabelecimento = this->estabelecimento;
-  this->fornecedor = fornecedor;
   this->clientes.push_back(primeiro_cliente);
 }
 

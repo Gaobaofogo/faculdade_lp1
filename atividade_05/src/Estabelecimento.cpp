@@ -1,16 +1,13 @@
 #include "Estabelecimento.hpp"
 #include "Produto.hpp"
+#include "vector_supermercado.hpp"
 
 #include <fstream>
 #include <iostream>
 #include <vector>
 
 Estabelecimento::Estabelecimento() {
-  Estabelecimento("estoque.csv");
-}
-
-Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
-  std::ifstream arquivo_estoque(caminho_arquivo_estoque);
+  std::ifstream arquivo_estoque("estoque.csv");
   std::string linha;
 
   if (arquivo_estoque.fail()) {
@@ -19,7 +16,7 @@ Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
   }
 
   bool primeira_linha = true;
-  std::vector<Produto> produtos;
+  vector_supermercado<Produto> produtos;
 
   while (std::getline(arquivo_estoque, linha)) {
     if (primeira_linha) {
@@ -60,7 +57,59 @@ Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
   }
 
   this->produtos = produtos;
-  std::cout << this->produtos[0].nome << std::endl;
+}
+
+Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
+  std::ifstream arquivo_estoque(caminho_arquivo_estoque);
+  std::string linha;
+
+  if (arquivo_estoque.fail()) {
+    std::cerr << "Arquivo não encontrado" << std::endl;
+    exit(1);
+  }
+
+  bool primeira_linha = true;
+  vector_supermercado<Produto> produtos;
+
+  while (std::getline(arquivo_estoque, linha)) {
+    if (primeira_linha) {
+      primeira_linha = false;
+      continue;
+    }
+
+    std::vector<std::string> produto;
+    std::string valor_do_produto;
+
+    size_t posicao;
+
+    do {
+
+      posicao = linha.find(',');
+
+      if (posicao == std::string::npos) {
+        valor_do_produto = linha;
+        produto.push_back(valor_do_produto);
+
+        break;
+      }
+
+      valor_do_produto = linha.substr(0, posicao);
+      produto.push_back(valor_do_produto);
+      linha.erase(0, posicao + 1); // + 1 para descontar a vírgula
+
+    } while (posicao != std::string::npos);
+
+    Produto novo_produto(
+        produto.at(0),
+        produto.at(1),
+        produto.at(2),
+        produto.at(3) + "." + produto.at(4),
+        produto.at(5)
+        );
+    produtos.push_back(novo_produto);
+  }
+
+  this->produtos = produtos;
 }
 
 void Estabelecimento::listar() {

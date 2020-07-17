@@ -2,6 +2,7 @@
 #define ESTABELECIMENTO_HPP
 
 #include "Produto.hpp"
+#include "vector_supermercado.hpp"
 
 #include <vector>
 #include <string>

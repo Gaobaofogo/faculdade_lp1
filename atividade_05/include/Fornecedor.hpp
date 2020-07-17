@@ -14,6 +14,7 @@ class Fornecedor {
 
   public:
     Fornecedor();
+    ~Fornecedor();
     Fornecedor(std::string nomeArquivo);
     void listarProdutos();
     bool repassarProdutos(Estabelecimento estabelecimento, std::string nomeProduto, int quantidade);

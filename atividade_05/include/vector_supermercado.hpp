@@ -16,11 +16,7 @@ class vector_supermercado {
     }
 
     ~vector_supermercado() {
-      for (size_t i = 0; i < this->size(); ++i) {
-        this->elementos[i].~T();
-      }
-
-      delete[] this->elementos;
+      delete this->elementos;
     }
 
     T* begin() {
