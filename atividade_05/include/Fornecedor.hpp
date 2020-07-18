@@ -3,13 +3,14 @@
 
 #include "Estabelecimento.hpp"
 #include "ProdutoFornecedor.hpp"
+#include "vector_supermercado.hpp"
 
 #include <vector>
 
 
 class Fornecedor {
   private:
-    std::vector<ProdutoFornecedor> produtos;
+    vector_supermercado<ProdutoFornecedor> produtos;
     void diminuiProdutos();
 
   public:

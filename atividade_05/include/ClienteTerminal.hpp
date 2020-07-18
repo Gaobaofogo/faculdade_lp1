@@ -4,12 +4,13 @@
 #include "Cliente.hpp"
 #include "Estabelecimento.hpp"
 #include "Fornecedor.hpp"
+#include "vector_supermercado.hpp"
 
 
 class ClienteTerminal {
   private:
     Estabelecimento estabelecimento;
-    std::vector<Cliente> clientes;
+    vector_supermercado<Cliente> clientes;
     Fornecedor fornecedor;
 
   public:

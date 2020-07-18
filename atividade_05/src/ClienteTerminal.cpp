@@ -4,9 +4,6 @@
 #include <iostream>
 
 ClienteTerminal::ClienteTerminal(const std::string& nome_arquivo) {
-  Cliente primeiro_cliente(0);
-
-  this->clientes.push_back(primeiro_cliente);
 }
 
 void ClienteTerminal::print_client_menu(int qntdClientes) {
@@ -116,6 +113,9 @@ void ClienteTerminal::abastecerEstoque() {
 }
 
 int ClienteTerminal::run() {
+  Cliente primeiro_cliente(0);
+  this->clientes.push_back(primeiro_cliente);
+
   enum Opcoes { 
     EncerrarAtividadeDoCliente,
     AddSaldo,

@@ -16,7 +16,7 @@ class vector_supermercado {
     }
 
     ~vector_supermercado() {
-      delete this->elementos;
+      delete[] this->elementos;
     }
 
     T* begin() {
@@ -36,10 +36,8 @@ class vector_supermercado {
           novo_vector[i] = this->elementos[i];
         }
 
-        T* aux = this->elementos;
+        delete[] this->elementos;
         this->elementos = novo_vector;
-
-        delete[] aux;
       }
 
       this->elementos[this->qntdElementos] = novoElemento;

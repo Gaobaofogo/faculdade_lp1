@@ -11,7 +11,7 @@
 class Estabelecimento {
   public:
     std::string codigo;
-    std::vector<Produto> produtos;
+    vector_supermercado<Produto> produtos;
     std::string unidadeMedida;
     float preco;
 

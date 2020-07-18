@@ -5,6 +5,10 @@
 #include <iostream>
 
 
+Cliente::Cliente() {
+  this->saldo = 0;
+}
+
 Cliente::Cliente(float _saldo): saldo(_saldo) {
 
 }
