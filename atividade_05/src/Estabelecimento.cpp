@@ -15,7 +15,7 @@ Estabelecimento::Estabelecimento() {
   }
 
   bool primeira_linha = true;
-  vector_supermercado<Produto> produtos;
+  std::vector<Produto> produtos;
 
   while (std::getline(arquivo_estoque, linha)) {
     if (primeira_linha) {
@@ -23,7 +23,7 @@ Estabelecimento::Estabelecimento() {
       continue;
     }
 
-    vector_supermercado<std::string> produto;
+    std::vector<std::string> produto;
     std::string valor_do_produto;
 
     size_t posicao;
@@ -68,7 +68,7 @@ Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
   }
 
   bool primeira_linha = true;
-  vector_supermercado<Produto> produtos;
+  std::vector<Produto> produtos;
 
   while (std::getline(arquivo_estoque, linha)) {
     if (primeira_linha) {
@@ -76,7 +76,7 @@ Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
       continue;
     }
 
-    vector_supermercado<std::string> produto;
+    std::vector<std::string> produto;
     std::string valor_do_produto;
 
     size_t posicao;
