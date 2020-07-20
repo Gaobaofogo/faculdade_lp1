@@ -68,15 +68,13 @@ class vector_supermercado {
     }
 
     T& operator=(T outro_vector) {
-      T* novo_vector = new T[outro_vector.size()];
+      //delete[] this->elementos;
+      this->elementos = new T[outro_vector.size()];
 
       for (size_t i = 0; i < outro_vector.size(); ++i) {
-        novo_vector[i] = outro_vector[i];
+        this->elementos[i] = outro_vector[i];
       }
 
-      delete[] this->elementos;
-
-      this->elementos = novo_vector;
       this->capacidade = outro_vector.capacity();
       this->qntdElementos = outro_vector.size();
     }
