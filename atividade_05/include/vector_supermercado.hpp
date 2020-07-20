@@ -29,7 +29,7 @@ class vector_supermercado {
       return &this->elementos[this->qntdElementos + 1];
     }
 
-    void push_back(T novoElemento) {
+    void push_back(const T& novoElemento) {
       if (this->size() == this->capacity()) {
         this->capacidade *= 2;
         T* novo_vector = new T[this->capacidade];
@@ -38,45 +38,46 @@ class vector_supermercado {
           novo_vector[i] = this->elementos[i];
         }
 
-        delete[] this->elementos;
+        T* aux = this->elementos;
         this->elementos = novo_vector;
+
+        delete[] aux;
+        novo_vector = nullptr;
+        aux = nullptr;
       }
 
       this->elementos[this->qntdElementos] = novoElemento;
       this->qntdElementos += 1;
     }
 
-    size_t size() {
+    size_t size() const {
       return this->qntdElementos;
     }
 
-    size_t capacity() {
+    size_t capacity() const {
       return this->capacidade;
     }
 
-    T& operator[](size_t i) {
-      if (i > this->size()) {
-        std::cerr << "Índice maior que o tamanho do array";
-        exit(1);
-      }
-
+    T& operator[](size_t i) const {
       return this->elementos[i];
     }
 
-    T& at(size_t i) {
+    T& at(size_t i) const {
       return this->elementos[i];
     }
 
-    T& operator=(T outro_vector) {
-      //delete[] this->elementos;
-      this->elementos = new T[outro_vector.size()];
-
-      for (size_t i = 0; i < outro_vector.size(); ++i) {
-        this->elementos[i] = outro_vector[i];
-      }
+    vector_supermercado<T>& operator=(const vector_supermercado<T>& outro_vector) {
+      delete[] this->elementos;
 
       this->capacidade = outro_vector.capacity();
       this->qntdElementos = outro_vector.size();
+      this->elementos = new T[this->capacidade];
+
+      for (size_t i = 0; i < this->size(); ++i) {
+        this->elementos[i] = outro_vector[i];
+      }
+
+      return *this;
     }
 };
 

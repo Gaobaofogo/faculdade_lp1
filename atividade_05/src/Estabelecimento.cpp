@@ -1,5 +1,6 @@
 #include "Estabelecimento.hpp"
 #include "Produto.hpp"
+#include "vector_supermercado.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -15,7 +16,7 @@ Estabelecimento::Estabelecimento() {
   }
 
   bool primeira_linha = true;
-  std::vector<Produto> produtos;
+  vector_supermercado<Produto> produtos;
 
   while (std::getline(arquivo_estoque, linha)) {
     if (primeira_linha) {
@@ -23,7 +24,7 @@ Estabelecimento::Estabelecimento() {
       continue;
     }
 
-    std::vector<std::string> produto;
+    vector_supermercado<std::string> produto;
     std::string valor_do_produto;
 
     size_t posicao;
@@ -68,7 +69,7 @@ Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
   }
 
   bool primeira_linha = true;
-  std::vector<Produto> produtos;
+  vector_supermercado<Produto> produtos;
 
   while (std::getline(arquivo_estoque, linha)) {
     if (primeira_linha) {
@@ -76,7 +77,7 @@ Estabelecimento::Estabelecimento(const std::string& caminho_arquivo_estoque) {
       continue;
     }
 
-    std::vector<std::string> produto;
+    vector_supermercado<std::string> produto;
     std::string valor_do_produto;
 
     size_t posicao;

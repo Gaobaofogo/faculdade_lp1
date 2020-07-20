@@ -2,6 +2,7 @@
 #define ESTABELECIMENTO_HPP
 
 #include "Produto.hpp"
+#include "vector_supermercado.hpp"
 
 #include <vector>
 #include <string>
@@ -10,7 +11,7 @@
 class Estabelecimento {
   public:
     std::string codigo;
-    std::vector<Produto> produtos;
+    vector_supermercado<Produto> produtos;
     std::string unidadeMedida;
     float preco;
 

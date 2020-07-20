@@ -15,6 +15,8 @@ Fornecedor::Fornecedor() {
   std::string nome;
   int quantidade;
 
+  std::getline(arquivo_leitura, linha);
+
   while (std::getline(arquivo_leitura, linha) && linha.size()) {
     nome = linha.substr(0, linha.find(','));
 
@@ -40,6 +42,8 @@ Fornecedor::Fornecedor(std::string nomeArquivo) {
   std::string nome;
   int quantidade;
 
+  std::getline(arquivo_leitura, linha);
+
   while (std::getline(arquivo_leitura, linha) && linha.size()) {
     nome = linha.substr(0, linha.find(','));
 
@@ -59,7 +63,9 @@ Fornecedor::~Fornecedor() {
   arquivo_escrita << "PRODUTO,QUANTIDADE" << std::endl;
 
   for (auto it = this->produtos.begin(); it != this->produtos.end(); ++it) {
-    arquivo_escrita << it->nome << "," << it->qntd << std::endl;
+    if (it->nome != "") {
+      arquivo_escrita << it->nome << "," << it->qntd << std::endl;
+    }
   }
 }
 
