@@ -4,8 +4,9 @@
 #include "Produto.hpp"
 #include "vector_supermercado.hpp"
 
-#include <vector>
+#include <map>
 #include <string>
+#include <vector>
 
 
 class Estabelecimento {
@@ -17,6 +18,7 @@ class Estabelecimento {
 
     Estabelecimento();
     Estabelecimento(const std::string& caminho_arquivo_estoque);
+    ~Estabelecimento();
     void listar();
     void venda(const std::string& codigo);
     Produto* buscaProduto(int codigo_produto);
@@ -25,7 +27,8 @@ class Estabelecimento {
     void caixa();
 
   private:
-    vector_supermercado<Produto> leituraDoEstoque();
+    vector_supermercado<std::map<std::string, std::string>> leituraDoEstoque();
+    void escreveCaixaNoDisco(const vector_supermercado<std::map<std::string, std::string>>& vendas);
 };
 
 #endif

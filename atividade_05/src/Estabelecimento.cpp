@@ -121,6 +121,33 @@ void Estabelecimento::listar() {
     std::cout << "\tPreço: R$ " << it->preco << std::endl << std::endl;
   }
 }
+void Estabelecimento::venda(const std::string& codigo) {
+  vector_supermercado<std::map<std::string, std::string>> vendas = this->leituraDoEstoque();
+  bool naoEncontrouProduto = true;
+
+  // TODO: Alterar as operações de soma. Agora, estou somando inteiros e floats
+  // a strings. Preciso converter as string em valores numéricos, realizar as
+  // operações e devolver os valores para string, atribuindo ao campo que o
+  // dado pertence.
+  for (size_t i = 0; i < vendas.size(); ++i) {
+    if (vendas[i]["CÓDIGO"] == codigo) {
+      encontrouProduto = false;
+      vendas[i]["QUANTIDADE_VENDIDA"] += 1;
+      vendas[i]["TOTAL_GANHO"] += vendas[i]["PREÇO"];
+    }
+  }
+
+  // TODO: Terminar de criar um produto e adicionar em vendas
+  // Já que não encontrei um produto já vendido, preciso pesquisar
+  // um já existente para colocar nos parâmetros.
+  if (naoEncontrouProduto) {
+    std::map<std::string, std::string> venda;
+
+    venda["CÓDIGO"] = 
+  }
+
+  this->escreveCaixaNoDisco(vendas);
+}
 
 Produto* Estabelecimento::buscaProduto(int codigo_produto) {
   for (auto it = this->produtos.begin(); it != this->produtos.end(); ++it) {
@@ -166,10 +193,9 @@ void extraiVendaDaLinha(std::string& linha, std::map<std::string, std::string>& 
   dadosDaVenda["TOTAL_GANHO"] = linha;
 }
 
-
-vector_supermercado<Produto> Estabelecimento::leituraDoEstoque() {
+vector_supermercado<std::map<std::string, std::string>> Estabelecimento::leituraDoEstoque() {
   std::fstream arquivo_leitura("estoque.csv");
-  vector_supermercado<Produto> produtosVendidos;
+  vector_supermercado<std::map<std::string, std::string>> produtosVendidos;
 
   if (!arquivo_leitura.fail()) {
     std::string linha;
@@ -179,9 +205,27 @@ vector_supermercado<Produto> Estabelecimento::leituraDoEstoque() {
 
     while (std::getline(arquivo_leitura, linha)) {
       extraiVendaDaLinha(linha, venda);
+
+      produtosVendidos.push_back(venda);
     }
   }
 
   return produtosVendidos;
+}
+
+void Estabelecimento::escreveCaixaNoDisco(const vector_supermercado<std::map<std::string, std::string>>& vendas) {
+  std::ofstream arquivoCaixa("caixa.csv");
+
+  arquivoCaixa << "CÓDIGO,NOME,PREÇO,QUANTIDE_VENDIDA,TOTAL_GANHO" << std::endl;
+
+  for (size_t i = 0; i < vendas.size(); ++i) {
+    std::cout << vendas[i]["CÓDIGO"] << ",";
+    std::cout << vendas[i]["NOME"] << ",";
+    std::cout << vendas[i]["PREÇO"] << ",";
+    std::cout << vendas[i]["QUANTIDADE_VENDIDA"] << ",";
+    std::cout << vendas[i]["TOTAL_GANHO"] << std::endl;
+  }
+
+  arquivoCaixa.close();
 }
 
