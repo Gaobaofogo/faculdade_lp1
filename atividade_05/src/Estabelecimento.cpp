@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <vector>
 
 Estabelecimento::Estabelecimento() {
@@ -149,3 +150,38 @@ void Estabelecimento::reabastecer(int codigo, int quantidade) {
     }
   }
 }
+void extraiVendaDaLinha(std::string& linha, std::map<std::string, std::string>& dadosDaVenda) {
+  dadosDaVenda["CÓDIGO"] = linha.substr(0, linha.find(","));
+  linha.erase(0, linha.find(",") + 1);
+
+  dadosDaVenda["NOME"] = linha.substr(0, linha.find(","));
+  linha.erase(0, linha.find(",") + 1);
+
+  dadosDaVenda["PREÇO"] = linha.substr(0, linha.find(","));
+  linha.erase(0, linha.find(",") + 1);
+
+  dadosDaVenda["QUANTIDADE_VENDIDA"] = linha.substr(0, linha.find(","));
+  linha.erase(0, linha.find(",") + 1);
+
+  dadosDaVenda["TOTAL_GANHO"] = linha;
+}
+
+
+vector_supermercado<Produto> Estabelecimento::leituraDoEstoque() {
+  std::fstream arquivo_leitura("estoque.csv");
+  vector_supermercado<Produto> produtosVendidos;
+
+  if (!arquivo_leitura.fail()) {
+    std::string linha;
+
+    std::getline(arquivo_leitura, linha);
+    std::map<std::string, std::string> venda;
+
+    while (std::getline(arquivo_leitura, linha)) {
+      extraiVendaDaLinha(linha, venda);
+    }
+  }
+
+  return produtosVendidos;
+}
+

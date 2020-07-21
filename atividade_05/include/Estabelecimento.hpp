@@ -23,6 +23,9 @@ class Estabelecimento {
     Produto* buscaProduto(std::string nome);
     void reabastecer(int codigo, int quantidade);
     void caixa();
+
+  private:
+    vector_supermercado<Produto> leituraDoEstoque();
 };
 
 #endif
