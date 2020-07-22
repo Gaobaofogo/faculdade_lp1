@@ -52,7 +52,7 @@ void ClienteTerminal::colocarProdutoNaSacola() {
   std::cout << "Digite o código do produto: ";
   std::cin >> codigo_produto;
 
-  Produto* produto_encontrado = this->estabelecimento.buscaProduto(codigo_produto);
+  Produto* produto_encontrado = this->supermercado.buscaProduto(codigo_produto);
 
   if (produto_encontrado == nullptr) {
     std::cout << "Produto não encontrado" << std::endl << std::endl;
@@ -74,9 +74,8 @@ bool ClienteTerminal::encerrarAtividadeDoCliente() {
 
   if (resposta == 'n' || resposta == 'N') {
     for (size_t i = 0; i < this->clientes[this->clientes.size() - 1].sacola.size(); ++i) {
-      std::cout << "Entrei no loop" << std::endl;
 
-      this->estabelecimento.venda(this->clientes[this->clientes.size() - 1].sacola[i].codigo);
+      this->supermercado.venda(this->clientes[this->clientes.size() - 1].sacola[i].codigo);
     }
 
     return false;
@@ -107,14 +106,14 @@ void ClienteTerminal::abastecerEstoque() {
   std::cin >> quantidade;
 
   bool temNoFornecedor = this->fornecedor.repassarProdutos(
-      this->estabelecimento,
+      this->supermercado,
       nome,
       quantidade
       );
   
   if (temNoFornecedor) {
-    Produto* produtoEncontrado = this->estabelecimento.buscaProduto(nome);
-    this->estabelecimento.reabastecer(produtoEncontrado->codigo, quantidade);
+    Produto* produtoEncontrado = this->supermercado.buscaProduto(nome);
+    this->supermercado.reabastecer(produtoEncontrado->codigo, quantidade);
   }
 }
 
@@ -149,7 +148,7 @@ int ClienteTerminal::run() {
       this->atualizar_saldo_do_cliente();
 
     } else if (opcao == VerLoja) {
-      this->estabelecimento.listar();
+      this->supermercado.listar();
 
     } else if (opcao == VerSacola) {
       this->exibirSacola();

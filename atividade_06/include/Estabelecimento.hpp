@@ -25,7 +25,7 @@ class Estabelecimento {
     void reabastecer(int codigo, int quantidade);
     void caixa();
 
-  private:
+  protected:
     vector_supermercado<std::map<std::string, std::string>> leituraDoEstoque();
     void escreveCaixaNoDisco(const vector_supermercado<std::map<std::string, std::string>>& vendas);
 };

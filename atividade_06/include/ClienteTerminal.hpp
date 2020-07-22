@@ -2,14 +2,14 @@
 #define CLIENTE_TERMINAL_HPP
 
 #include "Cliente.hpp"
-#include "Estabelecimento.hpp"
+#include "Supermercado.hpp"
 #include "Fornecedor.hpp"
 #include "vector_supermercado.hpp"
 
 
 class ClienteTerminal {
   private:
-    Estabelecimento estabelecimento;
+    Supermercado supermercado;
     vector_supermercado<Cliente> clientes;
     Fornecedor fornecedor;
 
