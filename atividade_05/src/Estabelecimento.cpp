@@ -133,7 +133,7 @@ void Estabelecimento::venda(int codigo) {
       float total_ganho = std::stof(vendas[i]["TOTAL_GANHO"]) + std::stof(vendas[i]["PREÇO"]);
 
       vendas[i]["QUANTIDADE_VENDIDA"] = std::to_string(quantidade_vendida);
-      vendas[i]["TOTAL_GANHO"] += std::to_string(total_ganho);
+      vendas[i]["TOTAL_GANHO"] = std::to_string(total_ganho);
     }
   }
 
@@ -200,7 +200,7 @@ void extraiVendaDaLinha(std::string& linha, std::map<std::string, std::string>& 
 }
 
 vector_supermercado<std::map<std::string, std::string>> Estabelecimento::leituraDoEstoque() {
-  std::fstream arquivo_leitura("estoque.csv");
+  std::fstream arquivo_leitura("caixa.csv");
   vector_supermercado<std::map<std::string, std::string>> produtosVendidos;
 
   if (!arquivo_leitura.fail()) {
@@ -226,11 +226,11 @@ void Estabelecimento::escreveCaixaNoDisco(const vector_supermercado<std::map<std
   arquivoCaixa << "CÓDIGO,NOME,PREÇO,QUANTIDE_VENDIDA,TOTAL_GANHO" << std::endl;
 
   for (size_t i = 0; i < vendas.size(); ++i) {
-    std::cout << vendas[i]["CÓDIGO"] << ",";
-    std::cout << vendas[i]["NOME"] << ",";
-    std::cout << vendas[i]["PREÇO"] << ",";
-    std::cout << vendas[i]["QUANTIDADE_VENDIDA"] << ",";
-    std::cout << vendas[i]["TOTAL_GANHO"] << std::endl;
+    arquivoCaixa << vendas[i]["CÓDIGO"] << ",";
+    arquivoCaixa << vendas[i]["NOME"] << ",";
+    arquivoCaixa << vendas[i]["PREÇO"] << ",";
+    arquivoCaixa << vendas[i]["QUANTIDADE_VENDIDA"] << ",";
+    arquivoCaixa << vendas[i]["TOTAL_GANHO"] << std::endl;
   }
 
   arquivoCaixa.close();
