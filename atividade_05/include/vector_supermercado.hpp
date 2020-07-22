@@ -26,7 +26,7 @@ class vector_supermercado {
     }
 
     T* end() {
-      return &this->elementos[this->qntdElementos + 1];
+      return &this->elementos[this->qntdElementos];
     }
 
     void push_back(const T& novoElemento) {

@@ -73,6 +73,12 @@ bool ClienteTerminal::encerrarAtividadeDoCliente() {
   std::cin >> resposta;
 
   if (resposta == 'n' || resposta == 'N') {
+    for (size_t i = 0; i < this->clientes[this->clientes.size() - 1].sacola.size(); ++i) {
+      std::cout << "Entrei no loop" << std::endl;
+
+      this->estabelecimento.venda(this->clientes[this->clientes.size() - 1].sacola[i].codigo);
+    }
+
     return false;
   } else if (resposta == 'y' || resposta == 'Y') {
 

@@ -121,13 +121,14 @@ void Estabelecimento::listar() {
     std::cout << "\tPreço: R$ " << it->preco << std::endl << std::endl;
   }
 }
-void Estabelecimento::venda(const std::string& codigo) {
+void Estabelecimento::venda(int codigo) {
   vector_supermercado<std::map<std::string, std::string>> vendas = this->leituraDoEstoque();
   bool naoEncontrouProduto = true;
 
   for (size_t i = 0; i < vendas.size(); ++i) {
-    if (vendas[i]["CÓDIGO"] == codigo) {
+    if (vendas[i]["CÓDIGO"] == std::to_string(codigo)) {
       naoEncontrouProduto = false;
+      std::cout << vendas[i]["QUANTIDADE_VENDIDA"] << std::endl;
       int quantidade_vendida = std::stoi(vendas[i]["QUANTIDADE_VENDIDA"]) + 1;
       float total_ganho = std::stof(vendas[i]["TOTAL_GANHO"]) + std::stof(vendas[i]["PREÇO"]);
 
@@ -138,7 +139,7 @@ void Estabelecimento::venda(const std::string& codigo) {
 
   if (naoEncontrouProduto) {
     std::map<std::string, std::string> venda;
-    int codigo_para_pesquisa = std::stoi(codigo);
+    int codigo_para_pesquisa = codigo;
 
     Produto* produtoEmEstoque = this->buscaProduto(codigo_para_pesquisa);
 
@@ -219,6 +220,7 @@ vector_supermercado<std::map<std::string, std::string>> Estabelecimento::leitura
 }
 
 void Estabelecimento::escreveCaixaNoDisco(const vector_supermercado<std::map<std::string, std::string>>& vendas) {
+  std::cout << "Entrei pra escrita" << std::endl;
   std::ofstream arquivoCaixa("caixa.csv");
 
   arquivoCaixa << "CÓDIGO,NOME,PREÇO,QUANTIDE_VENDIDA,TOTAL_GANHO" << std::endl;
