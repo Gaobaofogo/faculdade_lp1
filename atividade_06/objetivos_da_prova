@@ -1,0 +1,7 @@
+## O que fazer na unidade 6
+
+- Trocar o nome da classe Estabelecimento para Supermercado e trocar os nomes dos arquivos tbm
+- Mover os atributos private para protected
+- Fazer Supermercado herdar de Estabelecimento
+- Alterar os imports no ClienteTerminal
+- Checar se compila
