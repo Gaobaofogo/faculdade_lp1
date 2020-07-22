@@ -1,7 +1,45 @@
-## O que fazer na unidade 6
+# O que fazer na unidade 6
 
-- Trocar o nome da classe Estabelecimento para Supermercado e trocar os nomes dos arquivos tbm
-- Mover os atributos private para protected
-- Fazer Supermercado herdar de Estabelecimento
-- Alterar os imports no ClienteTerminal
-- Checar se compila
+## Primeiros passos
+
+- Colocar os arquivos que o professor enviou na pasta do projeto (*)
+
+## Separação de código
+
+- Trocar o nome da classe Estabelecimento para Supermercado e trocar os nomes dos arquivos tbm (*)
+- Mover os atributos private para protected (*)
+- Fazer Supermercado herdar de Estabelecimento (*)
+- Alterar os imports no ClienteTerminal (*)
+- Checar se compila (*)
+
+- Criar a classe restaurante (*)
+- O estoque e o fornecedor devem ser retirados de Estabelescimento e colocados em supermercado (*)
+- Checar se compila (*)
+
+## Separação de funções na main
+
+- Perguntar ao usuário se ele vai usar o Supermercado ou o Restaurante (*)
+- Criar código para separar a exibição e funcionamento dependendo da resposta do usuário (*)
+- Ver se compila e se roda bem em tempo de execução (*)
+- Criar uma função para o supermercado (*)
+
+## Trabalhando na separação das classes e na herança
+
+- Ver quais funções se encaixam nos dois contextos e manter. Se a implementação for genérica, manter. Caso contrário, deixar só o método declarado e deixar a implementação para as classes filhas (*)
+- Colocar o cardápio no restaurante como a lista de produtos disponíveis para compra (*)
+
+## Implementação do Supermercado
+
+- Mudar o nome do arquivo de escrita e de leitura (*)
+
+## Implementação do restaurante
+
+- Mudar o nome do arquivo de escrita
+- Criar o inicializador e lerr do arquivo menu.csv
+- No ClienteTerminal, receber do usuário que item do menu ele deseja comer
+- Implementar o menu
+- Implementar a função de listar os itens do menu
+
+## O que fazer depois de terminar a prova
+
+- Corrigir o vazamento de memória do fornecedor

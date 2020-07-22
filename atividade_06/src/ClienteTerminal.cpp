@@ -6,6 +6,83 @@
 ClienteTerminal::ClienteTerminal(const std::string& nome_arquivo) {
 }
 
+int ClienteTerminal::run() {
+  std::string usuarioInput;
+
+  std::cout << "Para escolher o supermercado, digite a letra s." << std::endl;
+  std::cout << "Para escolher o restaurante, digite a letra r." << std::endl;
+  std::cout << "Digite a opção: ";
+  std::cin >> usuarioInput;
+
+  if (usuarioInput == "r") {
+    this->executarRestaurante();
+  } else if (usuarioInput == "s") {
+    this->executarSupermercado();
+  } else {
+    std::cout << "Opção não conhecida pelo programa." << std::endl;
+  }
+
+  return 0;
+}
+
+void ClienteTerminal::executarSupermercado() {
+  Cliente primeiro_cliente(0);
+  this->clientes.push_back(primeiro_cliente);
+
+  enum Opcoes { 
+    EncerrarAtividadeDoCliente,
+    AddSaldo,
+    VerLoja,
+    VerSacola,
+    AddNaSacola,
+    VerFornecedor,
+    AbastecerEstoque
+    };
+  Opcoes opcao;
+  int input_do_usuario;
+  bool continuar_no_programa = true;
+
+  std::cout << "Supermercado virtual 1.3" << std::endl;
+
+  while (continuar_no_programa == true) {
+    this->print_client_menu(this->clientes.size());
+
+    std::cout << "Digite uma opção: ";
+    std::cin >> input_do_usuario;
+
+    opcao = Opcoes(input_do_usuario);
+
+    if (opcao == AddSaldo) {
+      this->atualizar_saldo_do_cliente();
+
+    } else if (opcao == VerLoja) {
+      this->supermercado.listar();
+
+    } else if (opcao == VerSacola) {
+      this->exibirSacola();
+
+    } else if (opcao == AddNaSacola) {
+      this->colocarProdutoNaSacola();
+
+    } else if (opcao == EncerrarAtividadeDoCliente) {
+      continuar_no_programa = this->encerrarAtividadeDoCliente();
+
+    } else if (opcao == VerFornecedor) {
+      this->supermercado.fornecedor.listarProdutos();
+
+    } else if (opcao == AbastecerEstoque) {
+      this->abastecerEstoque();
+
+    } else {
+      std::cout << "Opção desconhecida pelo programa." << std::endl;
+    }
+  }
+}
+
+void ClienteTerminal::executarRestaurante() {
+  std::cout << "Restaurante online 1.0" << std::endl;
+}
+
 void ClienteTerminal::print_client_menu(int qntdClientes) {
   std::cout << std::endl;
   std::cout << "Selecione uma opção cliente " << qntdClientes << ":" << std::endl << std::endl;
@@ -90,7 +167,7 @@ bool ClienteTerminal::encerrarAtividadeDoCliente() {
     return false;
   }
 
-  this->clientes[this->clientes.size() - 1].registro(this->clientes.size());
+  this->clientes[this->clientes.size() - 1].registro(this->clientes.size(), "supermercado");
 
   return true;
 }
@@ -105,7 +182,7 @@ void ClienteTerminal::abastecerEstoque() {
   std::cout << "Digite a quantidade: ";
   std::cin >> quantidade;
 
-  bool temNoFornecedor = this->fornecedor.repassarProdutos(
+  bool temNoFornecedor = this->supermercado.fornecedor.repassarProdutos(
       this->supermercado,
       nome,
       quantidade
@@ -117,58 +194,3 @@ void ClienteTerminal::abastecerEstoque() {
   }
 }
 
-int ClienteTerminal::run() {
-  Cliente primeiro_cliente(0);
-  this->clientes.push_back(primeiro_cliente);
-
-  enum Opcoes { 
-    EncerrarAtividadeDoCliente,
-    AddSaldo,
-    VerLoja,
-    VerSacola,
-    AddNaSacola,
-    VerFornecedor,
-    AbastecerEstoque
-    };
-  Opcoes opcao;
-  int input_do_usuario;
-  bool continuar_no_programa = true;
-
-  std::cout << "Loja virtual 1.0" << std::endl;
-
-  while (continuar_no_programa == true) {
-    this->print_client_menu(this->clientes.size());
-
-    std::cout << "Digite uma opção: ";
-    std::cin >> input_do_usuario;
-
-    opcao = Opcoes(input_do_usuario);
-
-    if (opcao == AddSaldo) {
-      this->atualizar_saldo_do_cliente();
-
-    } else if (opcao == VerLoja) {
-      this->supermercado.listar();
-
-    } else if (opcao == VerSacola) {
-      this->exibirSacola();
-
-    } else if (opcao == AddNaSacola) {
-      this->colocarProdutoNaSacola();
-
-    } else if (opcao == EncerrarAtividadeDoCliente) {
-      continuar_no_programa = this->encerrarAtividadeDoCliente();
-
-    } else if (opcao == VerFornecedor) {
-      this->fornecedor.listarProdutos();
-
-    } else if (opcao == AbastecerEstoque) {
-      this->abastecerEstoque();
-
-    } else {
-      std::cout << "Opção desconhecida pelo programa." << std::endl;
-    }
-  }
-
-  return 0;
-}

@@ -22,8 +22,8 @@ void Cliente::compra(Produto novo_produto) {
   this->sacola.push_back(novo_produto);
 }
 
-void Cliente::registro(int numero_do_cliente) {
-  std::string nome_arquivo = "cliente_" + std::to_string(numero_do_cliente) + ".txt";
+void Cliente::registro(int numero_do_cliente, std::string sufixo) {
+  std::string nome_arquivo = "cliente_" + std::to_string(numero_do_cliente) + "_" + sufixo + ".txt";
   std::ofstream arquivo_do_cliente_escrita(nome_arquivo);
 
   arquivo_do_cliente_escrita << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO,QUANTIDADE" << std::endl;

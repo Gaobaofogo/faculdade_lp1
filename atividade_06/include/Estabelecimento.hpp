@@ -11,7 +11,6 @@
 
 class Estabelecimento {
   public:
-    std::string codigo;
     vector_supermercado<Produto> produtos;
     std::string unidadeMedida;
     float preco;
@@ -22,7 +21,6 @@ class Estabelecimento {
     void venda(int codigo);
     Produto* buscaProduto(int codigo_produto);
     Produto* buscaProduto(std::string nome);
-    void reabastecer(int codigo, int quantidade);
     void caixa();
 
   protected:

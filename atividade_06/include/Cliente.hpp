@@ -17,7 +17,7 @@ class Cliente {
     Cliente(float _saldo);
     void compra(Produto novo_produto);
     void verSacola();
-    void registro(int numero_do_cliente);
+    void registro(int numero_do_cliente, std::string sufixo);
 };
 
 #endif
