@@ -125,25 +125,30 @@ void Estabelecimento::venda(const std::string& codigo) {
   vector_supermercado<std::map<std::string, std::string>> vendas = this->leituraDoEstoque();
   bool naoEncontrouProduto = true;
 
-  // TODO: Alterar as operações de soma. Agora, estou somando inteiros e floats
-  // a strings. Preciso converter as string em valores numéricos, realizar as
-  // operações e devolver os valores para string, atribuindo ao campo que o
-  // dado pertence.
   for (size_t i = 0; i < vendas.size(); ++i) {
     if (vendas[i]["CÓDIGO"] == codigo) {
-      encontrouProduto = false;
-      vendas[i]["QUANTIDADE_VENDIDA"] += 1;
-      vendas[i]["TOTAL_GANHO"] += vendas[i]["PREÇO"];
+      naoEncontrouProduto = false;
+      int quantidade_vendida = std::stoi(vendas[i]["QUANTIDADE_VENDIDA"]) + 1;
+      float total_ganho = std::stof(vendas[i]["TOTAL_GANHO"]) + std::stof(vendas[i]["PREÇO"]);
+
+      vendas[i]["QUANTIDADE_VENDIDA"] = std::to_string(quantidade_vendida);
+      vendas[i]["TOTAL_GANHO"] += std::to_string(total_ganho);
     }
   }
 
-  // TODO: Terminar de criar um produto e adicionar em vendas
-  // Já que não encontrei um produto já vendido, preciso pesquisar
-  // um já existente para colocar nos parâmetros.
   if (naoEncontrouProduto) {
     std::map<std::string, std::string> venda;
+    int codigo_para_pesquisa = std::stoi(codigo);
 
-    venda["CÓDIGO"] = 
+    Produto* produtoEmEstoque = this->buscaProduto(codigo_para_pesquisa);
+
+    venda["CÓDIGO"] = std::to_string(produtoEmEstoque->codigo);
+    venda["NOME"] = produtoEmEstoque->nome;
+    venda["PREÇO"] = std::to_string(produtoEmEstoque->preco);
+    venda["QUANTIDADE_VENDIDA"] = "1";
+    venda["TOTAL_GANHO"] = std::to_string(produtoEmEstoque->preco);
+
+    vendas.push_back(venda);
   }
 
   this->escreveCaixaNoDisco(vendas);

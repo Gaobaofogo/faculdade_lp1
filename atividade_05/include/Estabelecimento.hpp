@@ -18,7 +18,6 @@ class Estabelecimento {
 
     Estabelecimento();
     Estabelecimento(const std::string& caminho_arquivo_estoque);
-    ~Estabelecimento();
     void listar();
     void venda(const std::string& codigo);
     Produto* buscaProduto(int codigo_produto);
