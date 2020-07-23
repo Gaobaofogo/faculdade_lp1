@@ -17,8 +17,10 @@ class ClienteTerminal {
     void executarSupermercado();
     void executarRestaurante();
     void print_client_menu(int qntdClientes);
+    void exibirMenuRestaurante();
     void atualizar_saldo_do_cliente();
     void exibirSacola();
+    void exibirMenu();
     void colocarProdutoNaSacola();
     bool encerrarAtividadeDoCliente();
     void abastecerEstoque();

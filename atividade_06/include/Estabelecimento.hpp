@@ -11,8 +11,6 @@
 
 class Estabelecimento {
   public:
-    vector_supermercado<Produto> produtos;
-    std::string unidadeMedida;
     float preco;
 
     Estabelecimento();

@@ -8,6 +8,7 @@
 class Supermercado : public Estabelecimento {
   public:
     Fornecedor fornecedor;
+    vector_supermercado<Produto> produtos;
 
     Supermercado();
     void venda(int codigo);

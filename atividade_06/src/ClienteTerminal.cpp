@@ -80,7 +80,27 @@ void ClienteTerminal::executarSupermercado() {
 }
 
 void ClienteTerminal::executarRestaurante() {
+  bool continuarNoPrograma = true;
+  enum Opcoes {
+    EncerrarRefeicao,
+    ListarMenu,
+    SelecionarPrato
+  };
+  Opcoes opcao;
+
   std::cout << "Restaurante online 1.0" << std::endl;
+
+  while (continuar_no_programa == true) {
+    this->exibirMenuRestaurante();
+
+    std::cout << "Digite a opção desejada: ";
+    std::cin >> opcao;
+
+    if (opcao == ListarMenu) {
+    } else if (opcao == SelecionarPrato) {  
+    } else if (opcao == EncerrarRefeicao) {
+    }
+  }
 }
 
 void ClienteTerminal::print_client_menu(int qntdClientes) {
@@ -94,6 +114,15 @@ void ClienteTerminal::print_client_menu(int qntdClientes) {
   std::cout << "\t6) Reabastecer o estoque" << std::endl;
   std::cout << std::endl;
   std::cout << "\t0) Encerrar as atividades do cliente " << qntdClientes << std::endl;
+}
+
+void ClienteTerminal::exibirMenuRestaurante() {
+  std::cout << std::endl;
+  std::cout << "Selecione uma opção:" << std::endl;
+  std::cout << "\t1) Ver menu" << std::endl;
+  std::cout << "\t2) Selecionar prato" << std::endl;
+  std::cout << std::endl;
+  std::cout << "\t0) Encerrar refeição" << std::endl;
 }
 
 void ClienteTerminal::atualizar_saldo_do_cliente() {
